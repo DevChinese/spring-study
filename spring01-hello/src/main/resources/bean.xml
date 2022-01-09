@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    使用spring创建对象，这些对象都叫做bean
+    id：变量名
+    class：需要new的对象
+    property：相对于给对象中的属性设置值，value: 给基础类型赋值，ref：给引用类型赋值一个bean的引用
+    -->
+    <bean id="user" class="com.hua.spring01.pojo.User">
+        <!--这种方式定义，User类中必须要有无参构造器，且name属性的set方法-->
+        <property name="name" value="hua"/>
+    </bean>
+
+    <bean id="hello" class="com.hua.spring01.pojo.Hello">
+        <property name="user" ref="user"/>
+    </bean>
+
+    <!--
+    使用有参构造创建bean
+        使用有参构造方式创建bean时，类定义可以没有无参构造器，也可以没有属性的set方法
+    -->
+    <!--第一种方式：通过index-->
+    <bean id="user2" class="com.hua.spring01.pojo.User2">
+        <constructor-arg index="0" value="user2"/>
+    </bean>
+    <!--第二种方式：通过参数类型，不推荐使用，当有多个参数同类型时会出问题-->
+    <bean id="user3" class="com.hua.spring01.pojo.User2">
+        <constructor-arg type="String" value="user3"/>
+    </bean>
+    <!--第三种方式：通过参数名，推荐使用-->
+    <bean id="user4" class="com.hua.spring01.pojo.User2">
+        <constructor-arg name="name" value="user4"/>
+    </bean>
+
+</beans>

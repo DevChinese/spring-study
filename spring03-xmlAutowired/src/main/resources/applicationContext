@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    在spring中有三种装配方式
+        1. 在xml中显示装配
+        2. 在java中显示装配
+        3. 隐式的自动装配bean（这节内容，重要）
+    -->
+
+    <bean id="cat" class="com.hua.spring03.pojo.Cat"/>
+    <bean id="dog" class="com.hua.spring03.pojo.Dog"/>
+
+    <!--
+    byName: 会自动在容器上下文中查找，和自己对象set方法后面属性名称相对应的bean-id
+        如setDog中的dog对应的bean id
+    注意: 必须保证对应的bean id唯一，即只有一个bean id为cat，但可以运行该类有其他的bean: cat2，cat3
+    -->
+    <bean id="people1" class="com.hua.spring03.pojo.People" autowire="byName"/>
+
+    <!--
+    byName: 会自动在容器上下文中查找，和自己对象属性类型相同的bean
+    注意: 需要保证对应类型的bean在spring上下文中全局唯一(不包括自己在代码中new出来不受spring管理的对象)，否则会冲突
+    -->
+    <bean id="people2" class="com.hua.spring03.pojo.People" autowire="byType"/>
+
+</beans>
